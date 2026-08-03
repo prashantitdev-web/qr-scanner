@@ -1,186 +1,303 @@
-let qr1 = "";
-let qr2 = "";
-let scanner = null;
-let currentScan = 0;
+/* Reset */
 
-//---------------------
-// Start Scanner
-//---------------------
-async function startScanner(target) {
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
 
-    currentScan = target;
-    document.getElementById("scannerModal").style.display = "flex";
+/* Body */
 
-    const reader = document.getElementById("reader");
+body{
 
-    reader.style.display = "block";
-    //reader.innerHTML = "";
-    
+    background:#eef2f7;
 
-    // Stop old scanner if running
-    if (scanner) {
-        try {
-            await scanner.stop();
-            await scanner.clear();
-        } catch (e) {}
-        scanner = null;
-    }
+    display:flex;
 
-    scanner = new Html5Qrcode("reader");
+    justify-content:center;
 
-    try {
+    align-items:center;
 
-        await scanner.start(
-            { facingMode: "environment" },
-            {
-                fps: 10,
-                qrbox: 220
-            },
-            onScanSuccess,
-            function () {}
-        );
+    min-height:100vh;
 
-    } catch (err) {
-
-        alert("Camera Error : " + err);
-
-    }
+    padding:20px;
 
 }
 
-//---------------------
-// QR Found
-//---------------------
-async function onScanSuccess(decodedText) {
+/* Main */
 
-    if (scanner) {
-        try {
-            await scanner.stop();
-            await scanner.clear();
-        } catch (e) {}
-        scanner = null;
-    }
+.main{
 
-    //document.getElementById("reader").innerHTML = "";
+    width:100%;
 
-    document.getElementById("scannerModal").style.display = "none";
+    display:flex;
 
-    if (currentScan === 1) {
-
-        qr1 = decodedText;
-        document.getElementById("qr1Text").innerText = decodedText;
-
-    } else {
-
-        qr2 = decodedText;
-        document.getElementById("qr2Text").innerText = decodedText;
-
-    }
+    justify-content:center;
 
 }
 
-//---------------------
-// Buttons
-//---------------------
-document.getElementById("scan1").onclick = function () {
-    startScanner(1);
-};
+/* App */
 
-document.getElementById("scan2").onclick = function () {
-    startScanner(2);
-};
+.app{
 
-//---------------------
-// Compare
-//---------------------
-document.getElementById("submit").onclick = function () {
+    width:100%;
 
-    if (qr1 === "") {
-        alert("Scan First QR");
-        return;
-    }
+    max-width:420px;
 
-    if (qr2 === "") {
-        alert("Scan Second QR");
-        return;
-    }
+    background:white;
 
-    if (qr1 === qr2) {
+    border-radius:20px;
 
-        showPopup("MATCHED", "#16a34a");
+    padding:25px;
 
-    } else {
-
-        showPopup("UNMATCHED", "#dc2626");
-
-    }
-
-};
-
-//---------------------
-// Popup
-//---------------------
-function showPopup(msg, color) {
-
-    const popup = document.getElementById("popup");
-    const text = document.getElementById("popupText");
-
-    popup.style.display = "flex";
-
-    text.innerHTML = msg;
-    text.style.background = color;
-    text.style.color = "#fff";
-
-    setTimeout(function () {
-        resetAll();
-    }, 10000);
+    box-shadow:0 15px 40px rgba(0,0,0,.15);
 
 }
 
-//---------------------
-// Reset
-//---------------------
-async function resetAll() {
+/* Header */
 
-    if (scanner) {
-        try {
-            await scanner.stop();
-            await scanner.clear();
-        } catch (e) {}
-        scanner = null;
-    }
+.header{
 
-    qr1 = "";
-    qr2 = "";
-    currentScan = 0;
+    text-align:center;
 
-    document.getElementById("popup").style.display = "none";
-    document.getElementById("scannerModal").style.display = "none";
-
-    document.getElementById("qr1Text").innerText = "Waiting For Scan...";
-    document.getElementById("qr2Text").innerText = "Waiting For Scan...";
-
-    const reader = document.getElementById("reader");
-    reader.innerHTML = "";
-    reader.style.display = "none";
+    margin-bottom:25px;
 
 }
-//---------------------
-// Close Scanner
-//---------------------
 
-document.getElementById("closeScanner").onclick = async function () {
+.header h1{
 
-    document.getElementById("scannerModal").style.display = "none";
+    color:#2563eb;
 
-    if (scanner) {
-        try {
-            await scanner.stop();
-            await scanner.clear();
-        } catch (e) {}
-        scanner = null;
-    }
+    font-size:30px;
 
-    document.getElementById("reader").innerHTML = "";
+}
 
-};
+.header p{
+
+    color:#666;
+
+    margin-top:5px;
+
+}
+
+/* Card */
+
+.card{
+
+    background:#f8fafc;
+
+    border-radius:15px;
+
+    padding:18px;
+
+    margin-bottom:20px;
+
+    border:1px solid #dbeafe;
+
+}
+
+/* Title */
+
+.card-title{
+
+    font-weight:bold;
+
+    color:#1f2937;
+
+    margin-bottom:10px;
+
+}
+
+/* QR Box */
+
+.qr-box{
+
+    height:70px;
+
+    background:white;
+
+    border:2px dashed #2563eb;
+
+    border-radius:10px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:#666;
+
+    margin-bottom:15px;
+
+    word-break:break-word;
+
+    padding:10px;
+
+}
+
+/* Scan Button */
+
+.scan-btn{
+
+    width:100%;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+}
+
+.scan-btn:hover{
+
+    background:#1d4ed8;
+
+}
+
+ 
+
+/* Submit */
+
+.submit-btn{
+
+    width:100%;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#16a34a;
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+/* Popup */
+
+#popup{
+
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(0,0,0,.6);
+
+}
+
+#popupText{
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:20px;
+
+    font-size:30px;
+
+    font-weight:bold;
+
+}
+/* Scanner Popup */
+
+.scanner-modal{
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:100%;
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(0,0,0,.8);
+
+    z-index:9999;
+
+}
+
+.scanner-content{
+
+    width:95%;
+
+    max-width:450px;
+
+    background:#fff;
+
+    border-radius:15px;
+
+    padding:20px;
+
+    position:relative;
+
+    text-align:center;
+
+}
+
+.close-btn{
+
+    position:absolute;
+
+    right:10px;
+
+    top:10px;
+
+    width:35px;
+
+    height:35px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:red;
+
+    color:white;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+}
+
+.scanner-content #reader{
+
+    width:100%;
+
+    border-radius:10px;
+
+    overflow:hidden;
+
+}
