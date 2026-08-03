@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>QR Comparator</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://unpkg.com/html5-qrcode"></script>
+
+</head>
+
+<body>
+
+<div class="main">
+
+    <div class="app">
+
+        <!-- Header -->
+
+        <div class="header">
+
+            <h1>QR Comparator</h1>
+
+            <p>Scan Two QR Codes And Compare Instantly</p>
+
+        </div>
+
+        <!-- First QR -->
+
+        <div class="card">
+
+            <div class="card-title">
+
+                📦 First QR Code
+
+            </div>
+
+            <div id="qr1Text" class="qr-box">
+
+                Waiting For Scan...
+
+            </div>
+
+            <button id="scan1" class="scan-btn">
+
+                📷 Scan First QR
+
+            </button>
+
+        </div>
+
+
+        <!-- Second QR -->
+
+        <div class="card">
+
+            <div class="card-title">
+
+                📦 Second QR Code
+
+            </div>
+
+            <div id="qr2Text" class="qr-box">
+
+                Waiting For Scan...
+
+            </div>
+
+            <button id="scan2" class="scan-btn">
+
+                📷 Scan Second QR
+
+            </button>
+
+        </div>
+
+
+        
+
+        <!-- Submit -->
+
+        <button id="submit" class="submit-btn">
+
+            ✔ Compare QR Codes
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- Popup -->
+
+ <div id="scannerModal" class="scanner-modal">
+
+    <div class="scanner-content">
+
+        <button id="closeScanner" class="close-btn">✖</button>
+
+        <h2>Scan QR Code</h2>
+
+        <div id="reader"></div>
+
+    </div>
+
+</div>
+
+<!-- Result Popup -->
+
+<div id="popup">
+
+    <div id="popupText">
+        RESULT
+    </div>
+
+</div>
+
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
