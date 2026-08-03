@@ -80,20 +80,7 @@
         </div>
 
 
-        <!-- Camera -->
-
-        <div class="camera-card">
-
-            <div class="camera-title">
-
-                📷 Camera Scanner
-
-            </div>
-
-            <div id="reader"></div>
-
-        </div>
-
+        
 
         <!-- Submit -->
 
@@ -110,15 +97,30 @@
 
 <!-- Popup -->
 
-<div id="popup">
+ <div id="scannerModal" class="scanner-modal">
 
-    <div id="popupText">
+    <div class="scanner-content">
 
-        RESULT
+        <button id="closeScanner" class="close-btn">✖</button>
+
+        <h2>Scan QR Code</h2>
+
+        <div id="reader"></div>
 
     </div>
 
 </div>
+
+<!-- Result Popup -->
+
+<div id="popup">
+
+    <div id="popupText">
+        RESULT
+    </div>
+
+</div>
+
 
 
 <script src="script.js"></script>
